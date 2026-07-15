@@ -3,11 +3,14 @@ import Nav from "@/components/Nav";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
+import { withPageSeo } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Get in touch with FUTURA and its brands.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeo("/contact", {
+    title: "Contact",
+    description: "Get in touch with FUTURA and its brands.",
+  });
+}
 
 // Contact addresses — change them here only. TODO: replace the placeholders.
 const CONTACTS = [

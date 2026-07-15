@@ -4,12 +4,15 @@ import Nav from "@/components/Nav";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
+import { withPageSeo } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "FUTURA is the parent company behind digital brands in software, media and technology.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeo("/about", {
+    title: "About Us",
+    description:
+      "FUTURA is the parent company behind digital brands in software, media and technology.",
+  });
+}
 
 // Brand sites the cards link to. TODO: set the real Luminor URL.
 const LUMINOR_URL = "/#luminor";
