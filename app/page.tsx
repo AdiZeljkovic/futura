@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
@@ -6,9 +7,14 @@ import Preloader from "@/components/Preloader";
 import MediaFx from "@/components/MediaFx";
 import Brandmark from "@/components/Brandmark";
 
-// Brand sites the portal sections link to. TODO: set the real Luminor URL.
-const LUMINOR_URL = "#luminor";
+// Brand sites the portal sections link to.
+const LUMINOR_URL = "https://luminor.solutions";
 const TECHPLAY_URL = "https://techplay.gg";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { url: "/" },
+};
 
 export default function Home() {
   return (
@@ -39,6 +45,8 @@ export default function Home() {
           <a
             className="panel__link"
             href={LUMINOR_URL}
+            target="_blank"
+            rel="noreferrer"
             aria-label="Visit Luminor Solutions"
           />
         </section>
@@ -73,16 +81,19 @@ export default function Home() {
               className="brandmark brandmark--small"
               paths={[{ d: "M22 14 h22 M22 14 v36 M22 26 h16 M30 26 v24", strokeWidth: 2 }]}
             />
-            <h2 className="wordmark wordmark--small">The Futura LLC</h2>
+            <h2 className="wordmark wordmark--small">Futura Digital LLC</h2>
             <p className="desc">Parent company for digital brands.</p>
-            <a className="contact-link" href="mailto:info@futura.example">
-              info@futura.example
+            <a className="contact-link" href="mailto:hello@thefutura.llc">
+              hello@thefutura.llc
             </a>
-            <p className="copyright">&copy; 2026 The Futura LLC. All rights reserved.</p>
+            <p className="copyright">
+              &copy; {new Date().getFullYear()} Futura Digital LLC. All rights reserved.
+            </p>
             <nav className="footer-links" aria-label="Legal">
               <Link href="/privacy-policy">Privacy Policy</Link>
               <Link href="/terms-of-use">Terms of Use</Link>
               <Link href="/cookie-policy">Cookie Policy</Link>
+              <Link href="/accessibility-policy">Accessibility Policy</Link>
             </nav>
           </Reveal>
         </section>

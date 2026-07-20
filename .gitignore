@@ -5,3 +5,7 @@ next-env.d.ts
 *.tsbuildinfo
 .env*
 !.env.example
+
+# Raw Midjourney source exports — kept locally for future re-edits, never
+# deployed or publicly served (moved out of public/ on 2026-07-20).
+/assets-source/

@@ -4,27 +4,33 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import { withPageSeo } from "@/lib/cms";
+import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return withPageSeo("/contact", {
+  const seo = await withPageSeo("/contact", {
     title: "Contact",
     description: "Get in touch with FUTURA and its brands.",
   });
+  return {
+    ...seo,
+    alternates: { canonical: "/contact" },
+    openGraph: { url: "/contact" },
+  };
 }
 
-// Contact addresses — change them here only. TODO: replace the placeholders.
+// Contact addresses — change them here only.
 const CONTACTS = [
   {
     accent: "general",
     name: "General Inquiries",
-    role: "The Futura LLC",
-    email: "info@futura.example",
+    role: "Futura Digital LLC",
+    email: "hello@thefutura.llc",
   },
   {
     accent: "luminor",
     name: "Luminor Solutions",
     role: "Software & Web Division",
-    email: "hello@luminor.example",
+    email: "info@luminor.solutions",
   },
   {
     accent: "techplay",
@@ -72,6 +78,12 @@ export default function ContactPage() {
         </section>
       </main>
       <SiteFooter />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
     </>
   );
 }

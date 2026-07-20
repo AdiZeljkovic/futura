@@ -5,17 +5,23 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SiteFooter from "@/components/SiteFooter";
 import { withPageSeo } from "@/lib/cms";
+import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return withPageSeo("/about", {
+  const seo = await withPageSeo("/about", {
     title: "About Us",
     description:
       "FUTURA is the parent company behind digital brands in software, media and technology.",
   });
+  return {
+    ...seo,
+    alternates: { canonical: "/about" },
+    openGraph: { url: "/about" },
+  };
 }
 
-// Brand sites the cards link to. TODO: set the real Luminor URL.
-const LUMINOR_URL = "/#luminor";
+// Brand sites the cards link to.
+const LUMINOR_URL = "https://luminor.solutions";
 const TECHPLAY_URL = "https://techplay.gg";
 
 export default function AboutPage() {
@@ -23,7 +29,7 @@ export default function AboutPage() {
     <>
       <Nav />
       <PageHero
-        eyebrow="The Futura LLC"
+        eyebrow="Futura Digital LLC"
         title="About Us"
         lead="A parent company that builds, launches and grows digital brands."
       />
@@ -58,7 +64,12 @@ export default function AboutPage() {
           <Reveal>
             <h2 className="subpage-heading">Our Brands</h2>
             <div className="brand-grid">
-              <a className="brand-card brand-card--luminor" href={LUMINOR_URL}>
+              <a
+                className="brand-card brand-card--luminor"
+                href={LUMINOR_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <h3 className="wordmark wordmark--small">Luminor Solutions</h3>
                 <p className="brand-sub brand-sub--luminor">
                   Software &amp; Web Division
@@ -107,6 +118,12 @@ export default function AboutPage() {
         </section>
       </main>
       <SiteFooter />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
+      />
     </>
   );
 }

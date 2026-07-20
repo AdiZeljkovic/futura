@@ -263,6 +263,17 @@ body {
   letter-spacing: 0.05em;
 }
 
+/* The hero's intro line sits over the busiest, brightest part of the
+   background video — the shared .desc halo isn't enough there, so it gets
+   a brighter color and a tighter, denser shadow stack on top of it. */
+.desc--hero {
+  color: var(--text);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.95),
+    0 2px 10px rgba(0, 0, 0, 0.9),
+    0 6px 30px rgba(0, 0, 0, 0.85);
+}
+
 /* Text sits on photographic backgrounds — always give it a dark halo */
 .desc,
 .tagline,
@@ -838,6 +849,62 @@ html.has-cursor * {
 
 .legal-prose a:hover {
   border-color: var(--text);
+}
+
+.legal-h3 {
+  font-family: var(--font-body), sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin: 1.8rem 0 0.9rem;
+}
+
+.legal-meta {
+  border: 1px solid rgba(138, 148, 166, 0.22);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.5rem;
+  background: rgba(138, 148, 166, 0.06);
+}
+
+.legal-meta p {
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.legal-meta p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-table-wrap {
+  overflow-x: auto;
+  margin: 1.2rem 0 1.5rem;
+}
+
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.legal-table th,
+.legal-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(138, 148, 166, 0.22);
+  line-height: 1.7;
+}
+
+.legal-table th {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 400;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(138, 148, 166, 0.08);
 }
 
 /* --- Footer links (homepage footer + slim sub-page footer) --- */

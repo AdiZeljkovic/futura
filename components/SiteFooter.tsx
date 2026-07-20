@@ -13,8 +13,11 @@ export default function SiteFooter() {
         <Link href="/privacy-policy">Privacy Policy</Link>
         <Link href="/terms-of-use">Terms of Use</Link>
         <Link href="/cookie-policy">Cookie Policy</Link>
+        <Link href="/accessibility-policy">Accessibility Policy</Link>
       </nav>
-      <p className="copyright">&copy; 2026 The Futura LLC. All rights reserved.</p>
+      <p className="copyright">
+        &copy; {new Date().getFullYear()} Futura Digital LLC. All rights reserved.
+      </p>
     </footer>
   );
 }
