@@ -6,6 +6,7 @@ import Image from "next/image";
 import HeroIntro from "@/components/HeroIntro";
 import Preloader from "@/components/Preloader";
 import MediaFx from "@/components/MediaFx";
+import { getSocials } from "@/lib/cms";
 
 // Brand sites the portal sections link to.
 const LUMINOR_URL = "https://luminor.solutions";
@@ -16,7 +17,8 @@ export const metadata: Metadata = {
   openGraph: { url: "/" },
 };
 
-export default function Home() {
+export default async function Home() {
+  const socials = await getSocials();
   return (
     <>
       <Preloader />
@@ -99,6 +101,15 @@ export default function Home() {
               <Link href="/cookie-policy">Cookie Policy</Link>
               <Link href="/accessibility-policy">Accessibility Policy</Link>
             </nav>
+            {socials.length > 0 && (
+              <nav className="footer-links social-links" aria-label="Social">
+                {socials.map((s) => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
+                    {s.label}
+                  </a>
+                ))}
+              </nav>
+            )}
           </Reveal>
         </section>
       </main>

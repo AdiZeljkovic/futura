@@ -31,13 +31,35 @@ export type CmsSettings = Partial<
     | "bingVerification"
     | "titleSuffix"
     | "homeTitle"
-    | "homeDescription",
+    | "homeDescription"
+    | "socialLinkedin"
+    | "socialInstagram"
+    | "socialFacebook"
+    | "socialX",
     string
   >
 >;
 
 export async function getCmsSettings(): Promise<CmsSettings> {
   return (await cms<CmsSettings>("/settings")) ?? {};
+}
+
+/**
+ * Social links, set from FuturaOS (Sites → FUTURA → Društvene mreže).
+ * FUTURA has no built-in defaults (unlike the brand sites) — a platform
+ * only appears once a URL is entered in the admin.
+ */
+export async function getSocials(): Promise<{ label: string; href: string }[]> {
+  const s = await getCmsSettings();
+  const entries: [string, string | undefined][] = [
+    ["LinkedIn", s.socialLinkedin],
+    ["Instagram", s.socialInstagram],
+    ["Facebook", s.socialFacebook],
+    ["X / Twitter", s.socialX],
+  ];
+  return entries
+    .filter(([, href]) => href?.trim())
+    .map(([label, href]) => ({ label, href: href!.trim() }));
 }
 
 type CmsPageSeo = {
