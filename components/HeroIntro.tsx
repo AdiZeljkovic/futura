@@ -5,7 +5,7 @@ import { getIntroHold } from "./timing";
 
 const item: Variants = {
   hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const wordmark: Variants = {
@@ -14,20 +14,20 @@ const wordmark: Variants = {
     opacity: 1,
     letterSpacing: "0.35em",
     filter: "blur(0px)",
-    transition: { duration: 1.6, ease: "easeOut" },
+    transition: { duration: 0.7, ease: "easeOut" },
   },
 };
 
 const separator: Variants = {
   hidden: { opacity: 0, scaleX: 0 },
-  show: { opacity: 1, scaleX: 1, transition: { duration: 0.9, ease: "easeOut" } },
+  show: { opacity: 1, scaleX: 1, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 export default function HeroIntro() {
   // Waits for the preloader on first visit; starts immediately afterwards.
   const container: Variants = {
     hidden: {},
-    show: { transition: { staggerChildren: 0.22, delayChildren: getIntroHold() + 0.2 } },
+    show: { transition: { staggerChildren: 0.12, delayChildren: getIntroHold() + 0.15 } },
   };
 
   return (
