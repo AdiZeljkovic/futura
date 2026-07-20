@@ -1,6 +1,6 @@
 // Shared choreography: hero intro and nav wait for the preloader to finish.
 // The preloader plays once per browser session; afterwards everything starts immediately.
-export const INTRO_HOLD = 2.0; // s — when the preloader starts its exit
+export const INTRO_HOLD = 1.1; // s — when the preloader starts its exit
 
 const KEY = "futura-intro-played";
 

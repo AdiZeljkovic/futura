@@ -7,6 +7,7 @@ export default function MediaFx({ src, poster }: { src: string; poster: string }
         className="panel__media"
         src={src}
         poster={poster}
+        preload="metadata"
         autoPlay
         muted
         loop

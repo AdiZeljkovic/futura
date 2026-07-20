@@ -22,7 +22,7 @@ export default function Preloader() {
       <motion.div
         className="preloader"
         animate={exiting ? { opacity: 0, filter: "blur(10px)" } : {}}
-        transition={{ duration: 0.7, ease: "easeInOut" }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
         onAnimationComplete={() => {
           if (exiting) {
             markIntroPlayed();
@@ -37,7 +37,7 @@ export default function Preloader() {
               key={i}
               initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.6, delay: 0.15 + i * 0.09, ease: "easeOut" }}
+              transition={{ duration: 0.45, delay: 0.1 + i * 0.06, ease: "easeOut" }}
             >
               {letter}
             </motion.span>
@@ -48,7 +48,7 @@ export default function Preloader() {
             className="preloader__bar"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 1.3, delay: 0.55, ease: [0.65, 0, 0.35, 1] }}
+            transition={{ duration: 0.7, delay: 0.35, ease: [0.65, 0, 0.35, 1] }}
             onAnimationComplete={() => setExiting(true)}
           />
         </div>
