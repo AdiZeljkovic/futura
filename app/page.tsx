@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
+import Image from "next/image";
 import HeroIntro from "@/components/HeroIntro";
 import Preloader from "@/components/Preloader";
 import MediaFx from "@/components/MediaFx";
-import Brandmark from "@/components/Brandmark";
 
 // Brand sites the portal sections link to.
 const LUMINOR_URL = "https://luminor.solutions";
@@ -72,14 +72,18 @@ export default function Home() {
           />
         </section>
 
-        {/* ============ FOOTER / THE FUTURA LLC ============ */}
+        {/* ============ FOOTER / FUTURA DIGITAL LLC ============ */}
         <section className="panel panel--footer" id="contact">
           <MediaFx src="/video/footer.mp4" poster="/img/footer.webp" />
           <div className="panel__bg" aria-hidden="true" />
           <Reveal>
-            <Brandmark
-              className="brandmark brandmark--small"
-              paths={[{ d: "M22 14 h22 M22 14 v36 M22 26 h16 M30 26 v24", strokeWidth: 2 }]}
+            <Image
+              src="/futura-icon-mark.png"
+              alt=""
+              aria-hidden="true"
+              width={762}
+              height={984}
+              className="footer-mark"
             />
             <h2 className="wordmark wordmark--small">Futura Digital LLC</h2>
             <p className="desc">Parent company for digital brands.</p>

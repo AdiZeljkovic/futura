@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { getIntroHold } from "./timing";
@@ -36,8 +37,15 @@ export default function Nav() {
         <Link href="/about" className={linkClass("/about")}>
           About
         </Link>
-        <Link href="/" className="nav__logo">
-          FUTURA
+        <Link href="/" className="nav__logo" aria-label="FUTURA — home">
+          <Image
+            src="/futura-logo.png"
+            alt="FUTURA"
+            width={1001}
+            height={210}
+            priority
+            className="nav__logo-img"
+          />
         </Link>
         <Link href="/contact" className={linkClass("/contact")}>
           Contact

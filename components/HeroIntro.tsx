@@ -45,7 +45,7 @@ export default function HeroIntro() {
           We&rsquo;re building the future.
         </motion.p>
         <motion.span className="separator" variants={separator} aria-hidden="true" />
-        <motion.p className="desc desc--hero" id="about" variants={item}>
+        <motion.p className="desc" id="about" variants={item}>
           Parent company behind digital brands in
           <br />
           software, media and technology.

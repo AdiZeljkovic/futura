@@ -1,11 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 
 // Slim shared footer for sub-pages (the homepage keeps its full video footer).
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
-      <Link href="/" className="site-footer__logo">
-        FUTURA
+      <Link href="/" className="site-footer__logo" aria-label="FUTURA — home">
+        <Image
+          src="/futura-logo.png"
+          alt="FUTURA"
+          width={1001}
+          height={210}
+          className="site-footer__logo-img"
+        />
       </Link>
       <nav className="footer-links" aria-label="Footer">
         <Link href="/about">About</Link>

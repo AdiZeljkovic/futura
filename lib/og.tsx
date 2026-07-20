@@ -16,10 +16,10 @@ function loadFonts() {
 
 let logoPromise: Promise<string> | null = null;
 
-/** White FUTURA wordmark (for the dark OG background) as a data URI. */
+/** FUTURA wordmark (light-on-transparent — reads on the dark OG background). */
 function loadLogo() {
   logoPromise ??= readFile(
-    join(process.cwd(), "public", "futura-logo-white.png")
+    join(process.cwd(), "public", "futura-logo.png")
   ).then((buf) => `data:image/png;base64,${buf.toString("base64")}`);
   return logoPromise;
 }
