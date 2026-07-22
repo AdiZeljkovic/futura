@@ -79,18 +79,21 @@ export async function withPageSeo(
   description?: string;
   robots?: { index: boolean; follow: boolean };
 }> {
-  const [seo, settings] = await Promise.all([
-    cms<CmsPageSeo>(`/seo?path=${encodeURIComponent(path)}`),
-    getCmsSettings(),
-  ]);
+  const seo = await cms<CmsPageSeo>(`/seo?path=${encodeURIComponent(path)}`);
 
   const title = seo?.title || base.title;
   const description = seo?.description || base.description;
 
-  // OG slika: prvo ona zadana za ovu stranicu, pa podrazumijevana sajta.
-  // Bez ijedne, podijeljen link izgleda kao prazna kartica — zato se
-  // openGraph blok uopste ne postavlja ako slike nema.
-  const img = seo?.ogImage || settings.ogImage;
+  /**
+   * OG sliku postavljamo SAMO ako je izričito zadana za ovu stranicu kroz
+   * FuturaOS.
+   *
+   * Svaka ruta već ima svoju sliku kroz Next.js konvenciju
+   * (app/<ruta>/opengraph-image.png). Kad bi se ovdje primjenjivala
+   * podrazumijevana slika sajta, jedna generička bi pregazila sve te
+   * napravljene — zato namjerno nema fallbacka na postavke sajta.
+   */
+  const img = seo?.ogImage;
   const shared = img
     ? {
         openGraph: {
