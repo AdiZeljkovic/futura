@@ -32,6 +32,7 @@ export type CmsSettings = Partial<
     | "titleSuffix"
     | "homeTitle"
     | "homeDescription"
+    | "ogImage"
     | "socialLinkedin"
     | "socialInstagram"
     | "socialFacebook"
@@ -63,6 +64,7 @@ export async function getSocials(): Promise<{ label: string; href: string }[]> {
 }
 
 type CmsPageSeo = {
+  ogImage?: string;
   title: string | null;
   description: string | null;
   noindex: boolean;
@@ -77,11 +79,44 @@ export async function withPageSeo(
   description?: string;
   robots?: { index: boolean; follow: boolean };
 }> {
-  const seo = await cms<CmsPageSeo>(`/seo?path=${encodeURIComponent(path)}`);
-  if (!seo) return base;
+  const [seo, settings] = await Promise.all([
+    cms<CmsPageSeo>(`/seo?path=${encodeURIComponent(path)}`),
+    getCmsSettings(),
+  ]);
+
+  const title = seo?.title || base.title;
+  const description = seo?.description || base.description;
+
+  // OG slika: prvo ona zadana za ovu stranicu, pa podrazumijevana sajta.
+  // Bez ijedne, podijeljen link izgleda kao prazna kartica — zato se
+  // openGraph blok uopste ne postavlja ako slike nema.
+  const img = seo?.ogImage || settings.ogImage;
+  const shared = img
+    ? {
+        openGraph: {
+          title,
+          description,
+          images: [{ url: img, width: 1200, height: 630, alt: title ?? "" }],
+        },
+        twitter: {
+          card: "summary_large_image" as const,
+          title,
+          description,
+          images: [img],
+        },
+      }
+    : {};
+
   return {
-    title: seo.title || base.title,
-    description: seo.description || base.description,
-    ...(seo.noindex ? { robots: { index: false, follow: false } } : {}),
+    title,
+    description,
+    ...shared,
+    ...(seo?.noindex ? { robots: { index: false, follow: false } } : {}),
   };
+}
+
+/** Sve stranice označene kao noindex — sitemap ih ne smije nuditi Googleu. */
+export async function getNoindexPaths(): Promise<Set<string>> {
+  const list = await cms<{ path: string; noindex: boolean }[]>("/seo");
+  return new Set((list ?? []).filter((r) => r.noindex).map((r) => r.path));
 }
